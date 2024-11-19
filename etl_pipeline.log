@@ -1,0 +1,21 @@
+2024-11-19 17:22:41,875 - INFO - Starting ETL pipeline
+2024-11-19 17:22:41,899 - INFO - New rows detected: 500
+2024-11-19 17:22:41,899 - INFO - Transforming data
+2024-11-19 17:22:41,936 - INFO - Loading data to Snowflake stage: Mpg.time.CUSTOMER_STAGE
+2024-11-19 17:22:41,936 - INFO - Snowflake Connector for Python Version: 3.7.1, Python Version: 3.12.0, Platform: Windows-11-10.0.22631-SP0
+2024-11-19 17:22:41,937 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2024-11-19 17:22:43,835 - INFO - query: [PUT file://D:\Analytics-Pipeline\Customer-Purchase-Analytics-Pipeline\stage_file...]
+2024-11-19 17:22:43,979 - INFO - query execution done
+2024-11-19 17:22:45,190 - INFO - closed
+2024-11-19 17:22:45,256 - INFO - No async queries seem to be running, deleting session
+2024-11-19 17:22:45,337 - INFO - Data successfully loaded to stage
+2024-11-19 17:22:45,339 - INFO - Loading data from stage Mpg.time.CUSTOMER_STAGE to table Mpg.time.CUSTOMER_PURCHASES
+2024-11-19 17:22:45,339 - INFO - Snowflake Connector for Python Version: 3.7.1, Python Version: 3.12.0, Platform: Windows-11-10.0.22631-SP0
+2024-11-19 17:22:45,340 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2024-11-19 17:22:46,136 - INFO - query: [COPY INTO Mpg.time.CUSTOMER_PURCHASES FROM @Mpg.time.CUSTOMER_STAGE FILE_FORMAT ...]
+2024-11-19 17:22:46,978 - INFO - query execution done
+2024-11-19 17:22:46,978 - INFO - Number of results in first chunk: 1
+2024-11-19 17:22:46,979 - INFO - closed
+2024-11-19 17:22:47,046 - INFO - No async queries seem to be running, deleting session
+2024-11-19 17:22:47,124 - INFO - Data successfully loaded into table Mpg.time.CUSTOMER_PURCHASES
+2024-11-19 17:22:47,128 - INFO - ETL pipeline completed successfully
