@@ -1,21 +1,41 @@
-2024-11-19 17:22:41,875 - INFO - Starting ETL pipeline
-2024-11-19 17:22:41,899 - INFO - New rows detected: 500
-2024-11-19 17:22:41,899 - INFO - Transforming data
-2024-11-19 17:22:41,936 - INFO - Loading data to Snowflake stage: Mpg.time.CUSTOMER_STAGE
-2024-11-19 17:22:41,936 - INFO - Snowflake Connector for Python Version: 3.7.1, Python Version: 3.12.0, Platform: Windows-11-10.0.22631-SP0
-2024-11-19 17:22:41,937 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
-2024-11-19 17:22:43,835 - INFO - query: [PUT file://D:\Analytics-Pipeline\Customer-Purchase-Analytics-Pipeline\stage_file...]
-2024-11-19 17:22:43,979 - INFO - query execution done
-2024-11-19 17:22:45,190 - INFO - closed
-2024-11-19 17:22:45,256 - INFO - No async queries seem to be running, deleting session
-2024-11-19 17:22:45,337 - INFO - Data successfully loaded to stage
-2024-11-19 17:22:45,339 - INFO - Loading data from stage Mpg.time.CUSTOMER_STAGE to table Mpg.time.CUSTOMER_PURCHASES
-2024-11-19 17:22:45,339 - INFO - Snowflake Connector for Python Version: 3.7.1, Python Version: 3.12.0, Platform: Windows-11-10.0.22631-SP0
-2024-11-19 17:22:45,340 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
-2024-11-19 17:22:46,136 - INFO - query: [COPY INTO Mpg.time.CUSTOMER_PURCHASES FROM @Mpg.time.CUSTOMER_STAGE FILE_FORMAT ...]
-2024-11-19 17:22:46,978 - INFO - query execution done
-2024-11-19 17:22:46,978 - INFO - Number of results in first chunk: 1
-2024-11-19 17:22:46,979 - INFO - closed
-2024-11-19 17:22:47,046 - INFO - No async queries seem to be running, deleting session
-2024-11-19 17:22:47,124 - INFO - Data successfully loaded into table Mpg.time.CUSTOMER_PURCHASES
-2024-11-19 17:22:47,128 - INFO - ETL pipeline completed successfully
+2024-11-19 19:02:00,073 - INFO - Starting ETL pipeline
+2024-11-19 19:02:00,082 - ERROR - Error in monitoring and triggering: invalid literal for int() with base 10: ''
+2024-11-19 19:02:00,083 - ERROR - ETL pipeline failed: invalid literal for int() with base 10: ''
+2024-11-19 19:03:28,145 - INFO - Starting ETL pipeline
+2024-11-19 19:03:28,146 - WARNING - Invalid content in trigger_checkpoint.txt. Using default value 0.
+2024-11-19 19:03:28,162 - INFO - New rows detected: 503
+2024-11-19 19:03:28,163 - INFO - Transforming data
+2024-11-19 19:03:28,176 - ERROR - Error during transformation: time data "11/19/2024 11.06" doesn't match format "%m/%d/%Y %H:%M", at position 500. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2024-11-19 19:03:28,177 - ERROR - Error in monitoring and triggering: time data "11/19/2024 11.06" doesn't match format "%m/%d/%Y %H:%M", at position 500. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2024-11-19 19:03:28,177 - ERROR - ETL pipeline failed: time data "11/19/2024 11.06" doesn't match format "%m/%d/%Y %H:%M", at position 500. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2024-11-19 19:04:51,815 - INFO - Starting ETL pipeline
+2024-11-19 19:04:51,815 - WARNING - Invalid content in trigger_checkpoint.txt. Using default value 0.
+2024-11-19 19:04:51,827 - INFO - New rows detected: 503
+2024-11-19 19:04:51,827 - INFO - Transforming data
+2024-11-19 19:04:51,845 - INFO - Loading data to Snowflake stage: Mpg.time.CUSTOMER_STAGE
+2024-11-19 19:04:51,845 - INFO - Snowflake Connector for Python Version: 3.7.1, Python Version: 3.12.0, Platform: Windows-11-10.0.22631-SP0
+2024-11-19 19:04:51,845 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2024-11-19 19:04:53,291 - INFO - query: [PUT file://D:\Analytics-Pipeline\Customer-Purchase-Analytics-Pipeline\stage_file...]
+2024-11-19 19:04:53,412 - INFO - query execution done
+2024-11-19 19:04:54,460 - INFO - closed
+2024-11-19 19:04:54,533 - INFO - No async queries seem to be running, deleting session
+2024-11-19 19:04:54,613 - INFO - Data successfully loaded to stage
+2024-11-19 19:04:54,615 - INFO - Loading data from stage Mpg.time.CUSTOMER_STAGE to table Mpg.time.CUSTOMER_PURCHASES
+2024-11-19 19:04:54,615 - INFO - Snowflake Connector for Python Version: 3.7.1, Python Version: 3.12.0, Platform: Windows-11-10.0.22631-SP0
+2024-11-19 19:04:54,616 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2024-11-19 19:04:55,267 - INFO - query: [COPY INTO Mpg.time.CUSTOMER_PURCHASES FROM @Mpg.time.CUSTOMER_STAGE FILE_FORMAT ...]
+2024-11-19 19:04:56,225 - INFO - query execution done
+2024-11-19 19:04:56,225 - INFO - Number of results in first chunk: 1
+2024-11-19 19:04:56,226 - INFO - closed
+2024-11-19 19:04:56,312 - INFO - No async queries seem to be running, deleting session
+2024-11-19 19:04:56,388 - INFO - Data successfully loaded into table Mpg.time.CUSTOMER_PURCHASES
+2024-11-19 19:04:56,390 - INFO - ETL pipeline completed successfully

@@ -10,12 +10,12 @@ logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format="%(asctime)s -
 
 # Snowflake configuration
 SNOWFLAKE_CONFIG = {
-    'user': 'darwin',
-    'password': '*1Darwin*1',
-    'account': 'raphmmj-jl14137',
-    'warehouse': 'timesheet',
-    'database': 'Mpg',
-    'schema': 'time'
+    'user': '',
+    'password': '',
+    'account': '',
+    'warehouse': '',
+    'database': '',
+    'schema': ''
 }
 
 # Snowflake connection
@@ -36,12 +36,27 @@ def extract(file_path):
 def transform(dataframe):
     try:
         logging.info("Transforming data")
-        dataframe['transaction_date'] = pd.to_datetime(dataframe['transaction_date'])
-        dataframe['amount'] = dataframe['amount'].astype(float)
+
+        # Replace any periods in the time portion with a colon for consistent format
+        dataframe['transaction_date'] = dataframe['transaction_date'].replace(r'(\d{1,2})\.(\d{2})$', r'\1:\2',
+                                                                              regex=True)
+
+        # Try to parse the date with the correct format
+        dataframe['transaction_date'] = pd.to_datetime(dataframe['transaction_date'], errors='coerce',
+                                                       format='%m/%d/%Y %H:%M')
+
+        # Log if any dates could not be converted
+        if dataframe['transaction_date'].isnull().any():
+            logging.warning(f"Some dates could not be parsed. They will be set as NaT (Not a Time).")
+
+        # Convert 'amount' to float (this is your desired numeric conversion)
+        dataframe['amount'] = pd.to_numeric(dataframe['amount'], errors='coerce')
+
         return dataframe
     except Exception as e:
         logging.error(f"Error during transformation: {e}")
         raise
+
 
 # Load to Snowflake stage
 def load_to_stage(dataframe, stage_name):
@@ -88,11 +103,16 @@ def monitor_and_trigger(file_path, stage_name, table_name):
     try:
         # Check if a trigger file exists
         trigger_file = "trigger_checkpoint.txt"
-        last_processed = 0
+        last_processed = 0  # Default to 0 if file doesn't exist or is empty
 
+        # If the trigger file exists and has a valid number, read it
         if os.path.exists(trigger_file):
             with open(trigger_file, "r") as f:
-                last_processed = int(f.read().strip())
+                content = f.read().strip()
+                if content.isdigit():  # Check if the content is a valid number
+                    last_processed = int(content)
+                else:
+                    logging.warning(f"Invalid content in {trigger_file}. Using default value 0.")
 
         # Load the file and find new rows
         data = pd.read_csv(file_path)
@@ -110,9 +130,11 @@ def monitor_and_trigger(file_path, stage_name, table_name):
 
         else:
             logging.info("No new rows detected. Skipping...")
+
     except Exception as e:
         logging.error(f"Error in monitoring and triggering: {e}")
         raise
+
 
 # Main ETL Pipeline
 def etl_pipeline(file_path, stage_name, table_name):
